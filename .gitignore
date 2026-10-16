@@ -1,0 +1,10 @@
+backend/**/bin/
+backend/**/obj/
+
+backend/.idea/
+backend/appsettings.Development.json
+docs/**/*.vpp.bak_*
+docs/**/*.vpp.vbak
+
+backend/**/appsettings*.json
+!backend/**/appsettings.Template.json
