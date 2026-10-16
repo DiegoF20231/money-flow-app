@@ -1,3 +1,6 @@
+using MoneyFlow.Api.Database;
+using MoneyFlow.Api.Database.PgSql;
+using MoneyFlow.Api.Database.Repositories.Users;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserRepository, UserDapperRepository>();
+builder.Services.AddScoped<IDbConnectionFactory, NpgSqlConnectionFactory>();
 
 var app = builder.Build();
 
