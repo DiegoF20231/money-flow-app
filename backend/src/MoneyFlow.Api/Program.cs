@@ -1,3 +1,4 @@
+using FluentValidation;
 using MoneyFlow.Api.Database;
 using MoneyFlow.Api.Database.PgSql;
 using MoneyFlow.Api.Database.Repositories.Users;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddScoped<IUserRepository, UserDapperRepository>();
 builder.Services.AddScoped<IDbConnectionFactory, NpgSqlConnectionFactory>();
 
@@ -43,6 +45,10 @@ app.MapGet("/weatherforecast", () =>
     .WithName("GetWeatherForecast");
 
 app.Run();
+
+public partial class Program
+{
+}
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
