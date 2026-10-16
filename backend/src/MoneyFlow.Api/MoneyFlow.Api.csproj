@@ -13,7 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Common\Abstractions\" />
       <Folder Include="Database\" />
       <Folder Include="Features\" />
     </ItemGroup>
