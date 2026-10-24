@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
 builder.Services.AddScoped<IUserRepository, UserDapperRepository>();
 builder.Services.AddScoped<IDbConnectionFactory, NpgSqlConnectionFactory>();
 
