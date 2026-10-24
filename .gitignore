@@ -5,6 +5,7 @@ backend/.idea/
 backend/appsettings.Development.json
 docs/**/*.vpp.bak_*
 docs/**/*.vpp.vbak
+docs/**/*.vpp.lck
 
 backend/**/appsettings*.json
 !backend/**/appsettings.Template.json
