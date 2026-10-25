@@ -9,9 +9,8 @@ public static class CategoryEndpoints
     {
         var group = app
             .MapGroup("api/categories")
+            .WithSummary("Category Endpoints")
             .WithTags("Categories")
-            .WithDescription("Category endpoints")
-            .WithName("Category endpoints name")
             .RequireAuthorization();
 
         CreateCategoryEndpoint.MapEndpoint(group);
