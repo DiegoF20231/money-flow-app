@@ -6,8 +6,6 @@ CREATE TABLE users
     password VARCHAR(255)        NOT NULL
 );
 
--- CREATE INDEX idx_users_email ON users (email);
-
 CREATE TABLE categories
 (
     category_id UUID         NOT NULL PRIMARY KEY,
