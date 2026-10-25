@@ -1,4 +1,6 @@
 using FluentValidation;
+using MoneyFlow.Api.Common.Authentication;
+using MoneyFlow.Api.Common.Extensions;
 using MoneyFlow.Api.Database;
 using MoneyFlow.Api.Database.PgSql;
 using MoneyFlow.Api.Database.Repositories.Users;
@@ -13,7 +15,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddScoped<IUserRepository, UserDapperRepository>();
+builder.Services.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
+builder.Services.AddScoped<ITokenProvider, JwtTokenProvider>();
 builder.Services.AddScoped<IDbConnectionFactory, NpgSqlConnectionFactory>();
+builder.Services.AddHandlers();
 
 var app = builder.Build();
 
@@ -45,6 +50,7 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast");
 
+app.MapEndpoints();
 app.Run();
 
 public partial class Program
