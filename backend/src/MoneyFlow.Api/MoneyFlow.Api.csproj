@@ -21,7 +21,6 @@
         <Folder Include="Features\Categories\"/>
         <Folder Include="Features\Transactions\"/>
         <Folder Include="Features\Users\Login\"/>
-        <Folder Include="Features\Users\SignUp\"/>
     </ItemGroup>
 
 </Project>
