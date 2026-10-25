@@ -1,4 +1,5 @@
 using MoneyFlow.Api.Features.Users.Login;
+using MoneyFlow.Api.Features.Users.SignUp;
 
 namespace MoneyFlow.Api.Features.Users;
 
@@ -12,6 +13,7 @@ public static class UserEndpoints
             .WithTags("Users");
 
         LoginEndpoint.MapEndpoint(group);
+        SignUpEndpoint.MapEndpoint(group);
 
         return group;
     }
