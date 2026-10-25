@@ -11,7 +11,7 @@ public class GetCategoryByIdEndpoint : IEndpoint
     {
         app
             .MapGet("/{categoryId:guid}", Handle)
-            .WithDisplayName("Get category by id")
+            .WithName("Get category by id")
             .WithSummary("Get By Id");
     }
 
