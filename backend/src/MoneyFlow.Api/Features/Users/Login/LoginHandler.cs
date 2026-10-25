@@ -10,15 +10,15 @@ public class LoginHandler(
     IUserRepository userRepository)
     : IHandler
 {
-    public async Task<Result<LoginResponse>> HandleAsync(LoginRequest request)
+    public async Task<Result<LoginResponse>> HandleAsync(LoginCommand command)
     {
-        var user = await userRepository.FindByEmailAsync(request.Email);
+        var user = await userRepository.FindByEmailAsync(command.Email);
         if (user is null)
         {
             return Result.Failure<LoginResponse>(UserErrors.InvalidCredentials);
         }
 
-        var passwordsMatch = passwordHasher.Verify(request.Password, user.Password);
+        var passwordsMatch = passwordHasher.Verify(command.Password, user.Password);
 
         if (!passwordsMatch)
         {
@@ -26,7 +26,7 @@ public class LoginHandler(
         }
 
         var token = tokenProvider.GenerateToken(user);
-        
+
         return Result.Success(new LoginResponse(token));
     }
 }

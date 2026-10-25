@@ -19,7 +19,9 @@ public class LoginEndpoint : IEndpoint
 
     private static async Task<IResult> Handle([FromBody] LoginRequest request, LoginHandler handler)
     {
-        var result = await handler.HandleAsync(request);
+        var command = new LoginCommand(request.Email, request.Password);
+        
+        var result = await handler.HandleAsync(command);
 
         if (!result.IsSuccess)
         {
