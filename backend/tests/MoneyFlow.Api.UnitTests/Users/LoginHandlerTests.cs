@@ -17,6 +17,7 @@ public class LoginHandlerTests
     [Fact]
     public async Task Handle_Should_Fail_WhenUserDoesNotExist()
     {
+        // Arrange
         var command = new LoginCommand("test@test.com", "1234567");
         _userRepositoryMock
             .Setup(x => x.FindByEmailAsync(
@@ -28,9 +29,11 @@ public class LoginHandlerTests
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);
-
+        
+        // Act
         var result = await handler.HandleAsync(command);
-
+        
+        // Assert
         _passwordHasherMock.Verify(
             x => x.Verify(
                 It.IsAny<string>(),
@@ -60,6 +63,7 @@ public class LoginHandlerTests
     [Fact]
     public async Task Handle_Should_Fail_WhenPasswordIsIncorrect()
     {
+        // Arrange
         var command = new LoginCommand("test@test.com", "wrong_password");
         var user = User.Create(
             Guid.NewGuid(),
@@ -79,9 +83,11 @@ public class LoginHandlerTests
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);
-
+        
+        // Act
         var result = await handler.HandleAsync(command);
         
+        // Assert
         _tokenProviderMock.Verify(
             x => x.GenerateToken(It.IsAny<User>()),
             Times.Never);
@@ -105,6 +111,7 @@ public class LoginHandlerTests
     [Fact]
     public async Task Handle_Should_Succeed_WhenCredentialsAreValid()
     {
+        // Arrange
         var command = new LoginCommand("test@test.com", "correct_password");
         
         var user = User.Create(
@@ -131,9 +138,12 @@ public class LoginHandlerTests
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);
-
+        
+        // Act
         var result = await handler.HandleAsync(command);
 
+        
+        // Arrange
         _tokenProviderMock.Verify(
             x => x.GenerateToken(user),
             Times.Once);
