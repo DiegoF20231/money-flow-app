@@ -1,4 +1,5 @@
 using MoneyFlow.Api.Features.Categories.Create;
+using MoneyFlow.Api.Features.Categories.GetById;
 
 namespace MoneyFlow.Api.Features.Categories;
 
@@ -14,7 +15,8 @@ public static class CategoryEndpoints
             .RequireAuthorization();
 
         CreateCategoryEndpoint.MapEndpoint(group);
-        
+        GetCategoryByIdEndpoint.MapEndpoint(group);
+
         return group;
     }
 }
