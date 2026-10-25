@@ -9,7 +9,7 @@ public class LoginEndpoint : IEndpoint
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
         app
-            .MapPost("login", Handle)
+            .MapPost("/login", Handle)
             .WithSummary("Login")
             .WithDescription("Login Endpoint")
             .WithName("Login")
