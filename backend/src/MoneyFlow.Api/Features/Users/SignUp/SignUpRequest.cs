@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MoneyFlow.Api.Features.Users.SignUp;
 
 public record SignUpRequest(
-    [property: Description("Username of the user"), DefaultValue("Jhon Doe")]
+    [property: Description("Username of the user"), DefaultValue("John Doe")]
     string Username,
     [property: Description("Email of the user"), DefaultValue("test@test.com")]
     string Email,
