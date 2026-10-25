@@ -15,6 +15,6 @@ public static class UserEndpoints
         LoginEndpoint.MapEndpoint(group);
         SignUpEndpoint.MapEndpoint(group);
 
-        return group;
+        return app;
     }
 }
