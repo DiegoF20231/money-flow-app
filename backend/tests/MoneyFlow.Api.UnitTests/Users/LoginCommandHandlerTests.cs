@@ -8,7 +8,7 @@ using Moq;
 
 namespace MoneyFlow.Api.UnitTests.Users;
 
-public class LoginHandlerTests
+public class LoginCommandHandlerTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock = new();
     private readonly Mock<IPasswordHasher> _passwordHasherMock = new();
@@ -25,7 +25,7 @@ public class LoginHandlerTests
             ))
             .ReturnsAsync((User?)null);
 
-        var handler = new LoginHandler(
+        var handler = new LoginCommandHandler(
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);
@@ -79,7 +79,7 @@ public class LoginHandlerTests
             .Setup(x => x.Verify(command.Password, user.Password))
             .Returns(false);
 
-        var handler = new LoginHandler(
+        var handler = new LoginCommandHandler(
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);
@@ -134,7 +134,7 @@ public class LoginHandlerTests
             .Setup(x => x.GenerateToken(user))
             .Returns(expectedToken);
 
-        var handler = new LoginHandler(
+        var handler = new LoginCommandHandler(
             _passwordHasherMock.Object,
             _tokenProviderMock.Object,
             _userRepositoryMock.Object);

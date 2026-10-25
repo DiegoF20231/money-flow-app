@@ -4,7 +4,7 @@ using MoneyFlow.Api.Database.Repositories.Users;
 
 namespace MoneyFlow.Api.Features.Users.Login;
 
-public class LoginHandler(
+public class LoginCommandHandler(
     IPasswordHasher passwordHasher,
     ITokenProvider tokenProvider,
     IUserRepository userRepository)

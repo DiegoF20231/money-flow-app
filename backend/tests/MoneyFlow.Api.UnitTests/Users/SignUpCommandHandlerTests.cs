@@ -8,7 +8,7 @@ using Moq;
 
 namespace MoneyFlow.Api.UnitTests.Users;
 
-public class SignUpHandlerTests
+public class SignUpCommandHandlerTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock = new();
     private readonly Mock<IPasswordHasher> _passwordHasherMock = new();
@@ -28,7 +28,7 @@ public class SignUpHandlerTests
             .Setup(x => x.FindByEmailAsync(command.Email))
             .ReturnsAsync(existingUser);
 
-        var handler = new SignUpHandler(
+        var handler = new SignUpCommandHandler(
             _passwordHasherMock.Object,
             _userRepositoryMock.Object);
 
@@ -81,7 +81,7 @@ public class SignUpHandlerTests
                 u.UserName == command.Username)))
             .ReturnsAsync(expectedUserId);
 
-        var handler = new SignUpHandler(
+        var handler = new SignUpCommandHandler(
             _passwordHasherMock.Object,
             _userRepositoryMock.Object);
 

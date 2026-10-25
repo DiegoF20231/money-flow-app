@@ -14,10 +14,10 @@ public class SignUpEndpoint : IEndpoint
             .WithName("Sign Up");
     }
 
-    private static async Task<IResult> Handle([FromBody] SignUpRequest request, SignUpHandler handler)
+    private static async Task<IResult> Handle([FromBody] SignUpRequest request, SignUpCommandHandler commandHandler)
     {
         var command = new SignUpCommand(request.Username, request.Email, request.Password);
-        var result = await handler.HandleAsync(command);
+        var result = await commandHandler.HandleAsync(command);
 
         if (!result.IsSuccess)
         {
