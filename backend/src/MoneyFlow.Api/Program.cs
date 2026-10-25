@@ -6,6 +6,7 @@ using MoneyFlow.Api.Common.Authentication;
 using MoneyFlow.Api.Common.Extensions;
 using MoneyFlow.Api.Database;
 using MoneyFlow.Api.Database.PgSql;
+using MoneyFlow.Api.Database.Repositories.Categories;
 using MoneyFlow.Api.Database.Repositories.Users;
 using Scalar.AspNetCore;
 
@@ -18,6 +19,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddScoped<IUserRepository, UserDapperRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryDapperRepository>();
 builder.Services.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
 builder.Services.AddScoped<ITokenProvider, JwtTokenProvider>();
 
@@ -28,7 +30,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:Key"]!)),
+            IssuerSigningKey =
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:Key"]!)),
             ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
             ValidAudience = builder.Configuration["JwtOptions:Audience"],
             ClockSkew = TimeSpan.Zero,
