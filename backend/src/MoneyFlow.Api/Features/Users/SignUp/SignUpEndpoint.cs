@@ -6,7 +6,11 @@ public class SignUpEndpoint : IEndpoint
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("/signup", Handle);
+        app
+            .MapGet("/signup", Handle)
+            .WithSummary("Sign Up")
+            .WithDescription("Sign Up Endpoint")
+            .WithName("Sign Up");
     }
 
     private static async Task<IResult> Handle(SignUpRequest request, SignUpHandler handler)
