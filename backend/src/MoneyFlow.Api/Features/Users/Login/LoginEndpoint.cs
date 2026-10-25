@@ -12,7 +12,6 @@ public class LoginEndpoint : IEndpoint
             .MapPost("/login", Handle)
             .WithSummary("Login")
             .WithDescription("Login Endpoint")
-            .WithName("Login")
             .WithValidation<LoginRequest>();
     }
 
@@ -20,7 +19,7 @@ public class LoginEndpoint : IEndpoint
     private static async Task<IResult> Handle([FromBody] LoginRequest request, LoginCommandHandler handler)
     {
         var command = new LoginCommand(request.Email, request.Password);
-        
+
         var result = await handler.HandleAsync(command);
 
         if (!result.IsSuccess)
