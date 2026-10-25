@@ -5,7 +5,7 @@ namespace MoneyFlow.Api.Database.Repositories.Categories;
 
 public class CategoryDapperRepository(IDbConnectionFactory connectionFactory) : ICategoryRepository
 {
-    public async Task<Category?> FindByIdAsync(Guid id)
+    public async Task<Category?> FindByIdAsync(Guid categoryId, Guid userId)
     {
         using var connection = connectionFactory.CreateConnection();
         const string sql = @"
@@ -15,11 +15,12 @@ public class CategoryDapperRepository(IDbConnectionFactory connectionFactory) : 
                          color,
                          type
                     FROM categories
-                    WHERE category_id = @CategoryId
+                    WHERE category_id = @CategoryId AND user_id = @UserId
                     ";
 
         var category = await connection
-            .QueryFirstOrDefaultAsync<Category>(sql, new { CategoryId = id });
+            .QueryFirstOrDefaultAsync<Category>(sql, 
+                new { CategoryId = categoryId, UserId = userId });
         return category;
     }
 
