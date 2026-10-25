@@ -17,11 +17,11 @@ public class LoginEndpoint : IEndpoint
     }
 
 
-    private static async Task<IResult> Handle([FromBody] LoginRequest request, LoginHandler handler)
+    private static async Task<IResult> Handle([FromBody] LoginRequest request, LoginCommandHandler commandHandler)
     {
         var command = new LoginCommand(request.Email, request.Password);
         
-        var result = await handler.HandleAsync(command);
+        var result = await commandHandler.HandleAsync(command);
 
         if (!result.IsSuccess)
         {
