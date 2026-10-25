@@ -17,6 +17,6 @@ public static class CategoryEndpoints
         CreateCategoryEndpoint.MapEndpoint(group);
         GetCategoryByIdEndpoint.MapEndpoint(group);
 
-        return group;
+        return app;
     }
 }
