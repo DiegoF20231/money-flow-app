@@ -8,10 +8,8 @@ public static class UserEndpoints
     {
         var group = app
             .MapGroup("api/auth")
-            .WithSummary("User Endpoints Summary")
-            .WithDescription("User Endpoints Description")
-            .WithName("User Endpoints Name")
-            .WithTags("Users Tag");
+            .WithSummary("User Endpoints")
+            .WithTags("Users");
 
         LoginEndpoint.MapEndpoint(group);
 

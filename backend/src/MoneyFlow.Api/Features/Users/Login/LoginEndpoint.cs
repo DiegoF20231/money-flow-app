@@ -10,6 +10,9 @@ public class LoginEndpoint : IEndpoint
     {
         app
             .MapPost("login", Handle)
+            .WithSummary("Login")
+            .WithDescription("Login Endpoint")
+            .WithName("Login")
             .WithValidation<LoginRequest>();
     }
 
