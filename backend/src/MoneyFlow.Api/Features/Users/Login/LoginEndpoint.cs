@@ -17,7 +17,7 @@ public class LoginEndpoint : IEndpoint
     }
 
 
-    private static async Task<IResult> Handle(LoginRequest request, LoginHandler handler)
+    private static async Task<IResult> Handle([FromBody] LoginRequest request, LoginHandler handler)
     {
         var result = await handler.HandleAsync(request);
 
