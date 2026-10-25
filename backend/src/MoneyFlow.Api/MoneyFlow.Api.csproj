@@ -18,7 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Features\Categories\"/>
+        <Folder Include="Features\Categories\Delete\" />
+        <Folder Include="Features\Categories\GetAll\" />
+        <Folder Include="Features\Categories\GetById\" />
+        <Folder Include="Features\Categories\Update\" />
         <Folder Include="Features\Transactions\"/>
     </ItemGroup>
 
