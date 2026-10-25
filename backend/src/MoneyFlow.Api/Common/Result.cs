@@ -12,9 +12,9 @@ public class Result
             throw new InvalidOperationException("The result is successful but the error is not None");
         }
 
-        if (!isSuccess && error != Error.None)
+        if (!isSuccess && error == Error.None)
         {
-            throw new InvalidOperationException("The result is failure but the error is not None");
+            throw new InvalidOperationException("The result is failure but the error is None");
         }
 
         IsSuccess = isSuccess;
@@ -24,7 +24,7 @@ public class Result
 
     public static Result Success() => new(true, Error.None);
     public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
-    
+
     public static Result Failure(Error error) => new(false, error);
     public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
 }
