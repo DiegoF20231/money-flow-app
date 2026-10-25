@@ -8,21 +8,21 @@ public class SignUpHandler(
     IPasswordHasher passwordHasher,
     IUserRepository userRepository) : IHandler
 {
-    public async Task<Result<SignUpResponse>> HandleAsync(SignUpRequest request)
+    public async Task<Result<SignUpResponse>> HandleAsync(SignUpCommand command)
     {
-        var user = await userRepository.FindByEmailAsync(request.Email);
+        var user = await userRepository.FindByEmailAsync(command.Email);
 
         if (user is not null)
         {
-            return Result.Failure<SignUpResponse>(UserErrors.AlreadyExistsByEmail(request.Email));
+            return Result.Failure<SignUpResponse>(UserErrors.AlreadyExistsByEmail(command.Email));
         }
 
-        var hashedPassword = passwordHasher.HashPassword(request.Password);
+        var hashedPassword = passwordHasher.HashPassword(command.Password);
         var newUser = User.Create(
             Guid.CreateVersion7(),
-            request.Username,
-            request.Email,
-            request.Password);
+            command.Username,
+            command.Email,
+            command.Password);
 
 
         var id = await userRepository.AddAsync(newUser);

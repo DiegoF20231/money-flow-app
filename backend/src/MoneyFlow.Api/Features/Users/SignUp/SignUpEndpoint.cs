@@ -16,7 +16,8 @@ public class SignUpEndpoint : IEndpoint
 
     private static async Task<IResult> Handle([FromBody] SignUpRequest request, SignUpHandler handler)
     {
-        var result = await handler.HandleAsync(request);
+        var command = new SignUpCommand(request.Username, request.Email, request.Password);
+        var result = await handler.HandleAsync(command);
 
         if (!result.IsSuccess)
         {
