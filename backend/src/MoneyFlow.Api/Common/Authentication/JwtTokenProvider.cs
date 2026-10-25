@@ -10,7 +10,7 @@ public class JwtTokenProvider(IConfiguration configuration) : ITokenProvider
 {
     public string GenerateToken(User user)
     {
-        var secretKey = configuration["JwtOptions:SecretKey"];
+        var secretKey = configuration["JwtOptions:Secret"];
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var tokenDescriptor = new SecurityTokenDescriptor
